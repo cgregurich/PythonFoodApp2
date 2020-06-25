@@ -64,8 +64,9 @@ class AddMealPage(Frame):
 
 		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage))
 		btn_new_adder = ttk.Button(self.frame_controls, text="Add Food", command=self.create_adder)
-		btn_clear = ttk.Button(self.frame_controls, text="Clear", command=self.reset)
+		btn_clear_page = ttk.Button(self.frame_controls, text="Clear Page", command=self.reset)
 		btn_calc = ttk.Button(self.frame_controls, text="Calculate", command=self.display_food_nutrition)
+		btn_clear_checked = ttk.Button(self.frame_controls, text="Clear Checked", command=self.clear_checked)
 		btn_save_meal = ttk.Button(self.frame_controls, text="Save Meal", command=self.save_meal_clicked)
 		
 
@@ -74,11 +75,12 @@ class AddMealPage(Frame):
 
 		btn_back.grid(row=0, column=0, sticky=N, pady=PADY)
 		btn_new_adder.grid(row=1, column=0, sticky=N, pady=PADY)
-		btn_clear.grid(row=2, column=0, pady=PADY)
+		btn_clear_page.grid(row=2, column=0, pady=PADY)
 		
 		btn_calc.grid(row=3, column=0, pady=PADY)
-		self.lbl_status.grid(row=4, column=0, sticky=N)
-		btn_save_meal.grid(row=5, column=0, sticky=N, pady=PADY)
+		btn_clear_checked.grid(row=4, column=0, pady=PADY)
+		self.lbl_status.grid(row=5, column=0, sticky=N)
+		btn_save_meal.grid(row=6, column=0, sticky=N, pady=PADY)
 
 
 		# frame_meal_name setup 
@@ -103,6 +105,8 @@ class AddMealPage(Frame):
 			lbl = Label(self.frame_macros)
 			lbl.grid(row=i+1, column=1)
 			self.macro_labels.append(lbl)
+
+
 
 
 	def show_clicked(self):
@@ -147,8 +151,8 @@ class AddMealPage(Frame):
 			adder['lbl_sugar'].config(text=food.sugar)
 
 		# Display the meal's nutrition
-		self.calc_macros()
-	
+		self.display_meal_macros()
+		
 
 	
 
@@ -158,16 +162,19 @@ class AddMealPage(Frame):
 	def create_adder(self):
 		"""Creates an adder:
 		An adder is the frame that allows user to select a food,
-		enter an amount, and then displays that specific food's nutrition"""
+		enter an amount, and then displays that specific food's nutrition.
+		self.adders is a dict with format key=adder row, value=adder dict
+		eg. first adder's key is 0. """
 		new_frame = Frame(self.frame_adders)
 		food_var = StringVar()
-		check_var = BooleanVar()
+		check_var = IntVar()
+
 
 
 		food_options = fooditemdao.retrieve_all_food_names()
 
 		# Create adder widgets
-		#check_del = ttk.Checkbutton(new_frame, var=check_var)
+		check_del = ttk.Checkbutton(new_frame, var=check_var)
 		optionmenu = ttk.OptionMenu(new_frame, food_var, "Select Food", command=self.food_selected, *food_options)
 		lbl_amount = Label(new_frame, text="Amount:")
 		entry_amount = ttk.Entry(new_frame)
@@ -194,7 +201,7 @@ class AddMealPage(Frame):
 
 
 		# Put widgets in adder frame
-		#check_del.grid(row=0, column=0, sticky=NE)
+		check_del.grid(row=0, column=0, sticky=NE)
 		optionmenu.grid(row=0, column=1, sticky=NE)
 		lbl_amount.grid(row=1, column=0, sticky=NE)
 		entry_amount.grid(row=1, column=1, sticky=NW)
@@ -216,7 +223,7 @@ class AddMealPage(Frame):
 		adder_dict = {}
 		adder_dict['frame'] = new_frame
 		adder_dict['food_var'] = food_var
-		#adder_dict['check_del'] = check_del
+		adder_dict['check_var'] = check_var
 		adder_dict['optionmenu'] = optionmenu
 		adder_dict['lbl_amount'] = lbl_amount
 		adder_dict['entry_amount'] = entry_amount
@@ -230,6 +237,29 @@ class AddMealPage(Frame):
 		self.adders[len(self.adders)] = adder_dict
 
 
+	def clear_checked(self):
+		"""Clears all adders where the checkbutton is checked.
+		Also recalculates daily nutrition."""
+		for adder in self.adders.values():
+			if adder['check_var'].get() == 1:
+				self._clear_adder(adder)
+
+		self.display_meal_macros()
+
+
+
+	def _clear_adder(self, adder):
+		adder['food_var'].set("Select Food")
+		adder['entry_amount'].delete(0, END)
+		adder['lbl_unit'].config(text="unit")
+		adder['lbl_unit'].config(text="unit")
+		adder['lbl_cal'].config(text="-") 
+		adder['lbl_carb'].config(text="-") 
+		adder['lbl_fat'].config(text="-") 
+		adder['lbl_protein'].config(text="-")
+		adder['lbl_fiber'].config(text="-")
+		adder['lbl_sugar'].config(text="-")
+		adder['check_var'].set(0)
 
 	
 
@@ -421,12 +451,15 @@ class AddMealPage(Frame):
 			return True
 		return False
 
-	def calc_macros(self):
+	def _calc_meal_macros(self):
 		"""Calculates the meal's nutrition based on the foods in the adders.
-		Displays the nutrition on the right side of the window."""
+		Returns the meal macros as a list (??)"""
+
+		# Make sure each adder is valid
 		for adder in self.adders.values():
 			if not self._is_adder_valid(adder):
 				return False
+
 		all_foods = self.get_foods_from_adders()
 
 		tags = ('cal', 'carb', 'fat', 'protein', 'fiber', 'sugar')
@@ -439,12 +472,12 @@ class AddMealPage(Frame):
 				meal_macros[i] += food.info[tags[i]]
 
 		meal_macros = self._format_macros(meal_macros)
-		self.display_meal_macros(meal_macros)
-		return True
+		return meal_macros
+		
 
 
 	def _format_macros(self, meal_macros):
-		"""Formats nutrition info.
+		"""Formats arg meal_macros.
 		If a whole number, displays as such eg. 4
 		If not a whole number, displays to one decimal place eg. 4.2"""
 		dec = 0
@@ -456,11 +489,16 @@ class AddMealPage(Frame):
 				meal_macros[i] = int(meal_macros[i])
 		return meal_macros
 
-	def display_meal_macros(self, meal_macros):
+	def display_meal_macros(self):
 		"""Puts arg meal_macros on page"""
+		meal_macros = self._calc_meal_macros()
+		if meal_macros == False:
+			return False
+
 		for i in range(len(self.macro_labels)):
 			macro = meal_macros[i]
 			self.macro_labels[i].config(text=meal_macros[i])
+		return True
 
 
 
@@ -479,7 +517,7 @@ class AddMealPage(Frame):
 
 
 	def display_food_nutrition(self):
-		if not self.calc_macros():
+		if not self.display_meal_macros():
 			return False
 
 		for adder in self.adders.values():
@@ -501,6 +539,8 @@ class AddMealPage(Frame):
 		for i in range(len(tags)):
 			adder[f"lbl_{tags[i]}"].config(text=f"{info[tags[i]]}")
 			
+
+
 
 
 	def _clear_page(self):

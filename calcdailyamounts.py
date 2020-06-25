@@ -60,16 +60,14 @@ class CalcDailyAmounts(Frame):
 			e.grid(row=0, column=i)
 
 
-			
 
-		
 
 	def _calc_col_widths(self):
 		for i in range(len(self.headers)):
 			self.col_widths.append(len(self.headers[i]))
 
 		
-		col_pad = 3
+		COL_PAD = 3
 		rows = self._init_rows()
 		for i in range (len(self.headers)):
 			max_width = self.col_widths[i]
@@ -79,7 +77,7 @@ class CalcDailyAmounts(Frame):
 
 			self.col_widths[i] = max_width
 		
-		self.col_widths = [self.col_widths[i] + col_pad for i in range(0, len(self.col_widths))]
+		self.col_widths = [self.col_widths[i] + COL_PAD for i in range(0, len(self.col_widths))]
 		
 
 		

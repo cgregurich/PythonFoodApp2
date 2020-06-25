@@ -47,7 +47,7 @@ class FoodApp(Tk):
 		self.frames = {}
 
 
-		# MEAL FRAME IS FOR TESTING
+		
 		for F in (StartPage, ViewMealsPage, AddFoodsPage, ViewFoodsPage, AddMealPage,
 					DisplayDaily, FoodsPricePage, CalcDailyAmounts):
 			
