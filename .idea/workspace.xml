@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fd7cca05-4ad6-4e4a-a24e-f22fa31b3465" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aRtN0dtQs0YL9704NxXZIn9Y9u" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.foodapp_main">
+    <configuration name="foodapp_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonFoodApp2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/foodapp_main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="graphicaluserinterface" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonFoodApp2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graphicaluserinterface.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.foodapp_main" />
+        <item itemvalue="Python.graphicaluserinterface" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fd7cca05-4ad6-4e4a-a24e-f22fa31b3465" name="Default Changelist" comment="" />
+      <created>1586710189269</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586710189269</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1899" height="167" key="GridCell.Tab.0.bottom" timestamp="1588807188217">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="167" key="GridCell.Tab.0.bottom/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1588807188217" />
+    <state width="1899" height="167" key="GridCell.Tab.0.center" timestamp="1588807188217">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="167" key="GridCell.Tab.0.center/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1588807188217" />
+    <state width="1899" height="167" key="GridCell.Tab.0.left" timestamp="1588807188216">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="167" key="GridCell.Tab.0.left/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1588807188216" />
+    <state width="1899" height="167" key="GridCell.Tab.0.right" timestamp="1588807188217">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1899" height="167" key="GridCell.Tab.0.right/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1588807188217" />
+    <state x="461" y="167" key="SettingsEditor" timestamp="1587242026553">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="167" key="SettingsEditor/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1587242026553" />
+    <state x="689" y="289" width="540" height="524" key="StructurePopup" timestamp="1587164070621">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="689" y="289" width="540" height="524" key="StructurePopup/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1587164070621" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1590337882656">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1590337882656" />
+    <state x="-958" y="-119" width="830" height="847" key="dock-window-1" timestamp="1588181893432">
+      <screen x="-1920" y="-165" width="1920" height="1050" />
+    </state>
+    <state x="-958" y="-119" width="830" height="847" key="dock-window-1/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1588181893432" />
+    <state x="701" y="183" key="refactoring.ChangeSignatureDialog" timestamp="1587604310285">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="701" y="183" key="refactoring.ChangeSignatureDialog/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1587604310285" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1587602177879">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/-1920.-165.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1587602177879" />
+  </component>
+</project>
