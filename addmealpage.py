@@ -167,7 +167,7 @@ class AddMealPage(Frame):
 		food_options = fooditemdao.retrieve_all_food_names()
 
 		# Create adder widgets
-		check_del = ttk.Checkbutton(new_frame, var=check_var)
+		#check_del = ttk.Checkbutton(new_frame, var=check_var)
 		optionmenu = ttk.OptionMenu(new_frame, food_var, "Select Food", command=self.food_selected, *food_options)
 		lbl_amount = Label(new_frame, text="Amount:")
 		entry_amount = ttk.Entry(new_frame)
@@ -194,7 +194,7 @@ class AddMealPage(Frame):
 
 
 		# Put widgets in adder frame
-		check_del.grid(row=0, column=0, sticky=NE)
+		#check_del.grid(row=0, column=0, sticky=NE)
 		optionmenu.grid(row=0, column=1, sticky=NE)
 		lbl_amount.grid(row=1, column=0, sticky=NE)
 		entry_amount.grid(row=1, column=1, sticky=NW)
@@ -216,7 +216,7 @@ class AddMealPage(Frame):
 		adder_dict = {}
 		adder_dict['frame'] = new_frame
 		adder_dict['food_var'] = food_var
-		adder_dict['check_del'] = check_del
+		#adder_dict['check_del'] = check_del
 		adder_dict['optionmenu'] = optionmenu
 		adder_dict['lbl_amount'] = lbl_amount
 		adder_dict['entry_amount'] = entry_amount
