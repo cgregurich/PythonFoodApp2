@@ -54,7 +54,7 @@ class ViewFoodsPage(Frame):
 		self.sorted = False
 
 		# Create controls
-		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage))
+		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage)) 
 		btn_add_row = ttk.Button(self.frame_controls, text="Add row", command=self.create_empty_row)
 		optionmenu_sort_mode = ttk.OptionMenu(self.frame_controls, self.sort_mode,"Unsorted", command=self.sort_mode_selected,  *self.HEADERS)
 		optionmenu_sort_order = ttk.OptionMenu(self.frame_controls, self.sort_order, "Order", command=self.sort_order_selected, *self.SORT_ORDERS)
@@ -255,6 +255,8 @@ class ViewFoodsPage(Frame):
 		# Overwrite DB with the data in the sheet
 		self.refresh_db_from_sheet()
 
+		self._deal_with_foodname_changes()
+
 		# Recalculate column widths in case of name changes
 		self.calc_col_widths()
 
@@ -271,6 +273,29 @@ class ViewFoodsPage(Frame):
 			self.sort_sheet()
 		return True
 
+
+	# def _deal_with_foodname_changes(self):
+	# 	"""Checks to make sure that all foodnames in meal DB are valid
+	# 	names in fooditem DB. Deletes any rows from meal DB where the foodname
+	# 	no longer exists in fooditem DB"""
+	# 	meal_names = mealdao.retrieve_all_meal_names()
+	# 	food_names = fooditemdao.retrieve_all_food_names()
+
+	# 	for meal_name in meal_names:
+	# 		if meal_name not in food_names:
+	# 			mealdao.delete_meal(meal_name)
+
+	def _deal_with_foodname_changes(self):
+		"""Checks to make sure that all foodnames in meal DB are valid
+		names in fooditem DB. Deletes any rows from meal DB where the foodname
+		no longer exists in fooditem DB"""
+		meal_food_names = mealdao.retrieve_all_food_names_set()
+		food_names = fooditemdao.retrieve_all_food_names()
+
+		for meal_food_name in meal_food_names:
+			if meal_food_name not in food_names:
+				mealdao.delete_food_with_name(meal_food_name)
+        
 
 	def _is_sheet_empty(self):
 		"""Returns True if the sheet contains zero rows

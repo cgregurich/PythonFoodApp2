@@ -80,15 +80,10 @@ class CalcDailyAmounts(Frame):
 		self.col_widths = [self.col_widths[i] + COL_PAD for i in range(0, len(self.col_widths))]
 		
 
-		
-
-		
-
 	def test_func(self):
 		pass
 
 	
-
 	def _create_food_dict(self):
 		"""Returns a dictionary of format:
 		key=foodname, value=amount of food needed per day * number of days selected"""

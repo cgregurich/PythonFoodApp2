@@ -9,6 +9,7 @@ from addmealpage import AddMealPage
 from addfoodspage import AddFoodsPage
 from foodspricepage import FoodsPricePage
 from calcdailyamounts import CalcDailyAmounts
+from viewproductspage import ViewProductsPage
 
 
 
@@ -31,7 +32,7 @@ class StartPage(Frame):
 
 		btn_calc_daily_amounts = ttk.Button(self, text="Calc Daily Amts (beta)", command=lambda: controller.show_frame(CalcDailyAmounts))
 
-		
+		btn_view_products = ttk.Button(self, text="View Products", command=lambda: controller.show_frame(ViewProductsPage))
 		
 
 		PADY = 5
@@ -42,6 +43,7 @@ class StartPage(Frame):
 		btn_view_meals.grid(row=3, column=0, pady=PADY)
 		btn_foods_price.grid(row=4, column=0, pady=PADY)
 		btn_calc_daily_amounts.grid(row=5, column=0, pady=PADY)
+		btn_view_products.grid(row=6, column=0, pady=PADY)
 		
 
 

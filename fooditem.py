@@ -8,7 +8,8 @@ class FoodItem:
         else:
             for key in self.info.keys():
                 self.info[key] = info_dict[key]
-            self.numberize_info()
+            if not self.is_missing_info():
+                self.numberize_info()
 
 
     def __str__(self):

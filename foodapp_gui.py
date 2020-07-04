@@ -20,7 +20,7 @@ from addmealpage import AddMealPage
 from displaydaily import DisplayDaily
 from foodspricepage import FoodsPricePage
 from calcdailyamounts import CalcDailyAmounts
-
+from viewproductspage import ViewProductsPage
 
 
 
@@ -49,7 +49,7 @@ class FoodApp(Tk):
 
 		
 		for F in (StartPage, ViewMealsPage, AddFoodsPage, ViewFoodsPage, AddMealPage,
-					DisplayDaily, FoodsPricePage, CalcDailyAmounts):
+					DisplayDaily, FoodsPricePage, CalcDailyAmounts, ViewProductsPage):
 			
 			frame = F(container, self)
 

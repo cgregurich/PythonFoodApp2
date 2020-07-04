@@ -1,6 +1,7 @@
 from meal import Meal
 import sqlite3
 from fooditem import FoodItem
+from fooditemdao import FoodItemDAO
 
 class MealDAO:
     def __init__(self, db_name='meal.db'):
@@ -181,6 +182,7 @@ class MealDAO:
             self.c.execute("""DELETE FROM meals WHERE foodname = ?""", (food_name,))
         return self.c.rowcount
 
+    
 
 
 

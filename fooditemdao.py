@@ -105,7 +105,5 @@ class FoodItemDAO:
             self.c.execute("SELECT name FROM fooditems")
             names = self.c.fetchall()
         # return list of str instead of list of tuples
-        names_list = []
-        for name in names:
-            names_list.append(name[0])
+        names_list = [name[0] for name in names]
         return names_list
