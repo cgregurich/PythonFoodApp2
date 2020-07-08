@@ -2,6 +2,9 @@ from fooditemdao import FoodItemDAO
 from fooditem import FoodItem
 from mealdao import MealDAO
 from meal import Meal
+from productdao import ProductDAO
+from product import Product
+
 
 import startpage
 
@@ -19,4 +22,5 @@ MONOSPACED_BIG = ("Consolas", 11)
 # DATA ACCESS OBJECTS
 fooditemdao = FoodItemDAO()
 mealdao = MealDAO()
+productdao = ProductDAO()
 

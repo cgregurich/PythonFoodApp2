@@ -1,11 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 
-from fooditemdao import FoodItemDAO
 
 import startpage
 
 from utilities import *
+
+from product import Product
 
 
 class AddFoodsPage(Frame):
@@ -55,17 +56,51 @@ class AddFoodsPage(Frame):
 	def add_food(self):
 		self._clear_error_labels()
 
-		food = FoodItem()
-		self.create_info_tuple()
+		
+		self._create_info_tuple()
+
+
 		if self.validate_form():
+
+			# get info to create FoodItem from form
 			food_info_list = []
 			for e in self.entries.values():
 				food_info_list.append(e.get())
+
+			food = FoodItem()
 			food.set_info_from_string_list(food_info_list)
+
+			if not self._is_name_unique(food):
+				return False
+
 			fooditemdao.insert_food(food)
+
+			self._add_food_to_product_db(food)
+
 			status_lbl = Label(self, text="Food added")
 			status_lbl.grid(row=0, column=1)
 			self.error_labels.append(status_lbl)
+
+	def _add_food_to_product_db(self, food):
+		p = self._create_product_from_food(food)
+		productdao.insert_product(p)
+
+	def _create_product_from_food(self, food):
+		info = {'foodname': food.name, 'amount': 0, 'unit': food.unit, 'cost': 0.00}
+		product = Product(info)
+		return product
+
+
+	def _is_name_unique(self, food):
+		"""Returns True if there are no foods in fooditem db with the name of arg food's name.
+		Else displays an error message and returns False"""
+		food_names = fooditemdao.retrieve_all_food_names()
+		if food.name in food_names:
+			messagebox.showerror("Duplicate Name", f"Food named '{food.name}' already exists")
+			return False
+		else:
+			return True
+
 
 	def validate_form(self):
 		"""
@@ -134,7 +169,7 @@ class AddFoodsPage(Frame):
 			return False
 		return True
 
-	def create_info_tuple(self):
+	def _create_info_tuple(self):
 		"""Takes the information in all the entries
 		and returns it as a tuple."""
 		info_list = []
@@ -143,3 +178,4 @@ class AddFoodsPage(Frame):
 
 	def reset(self):
 		self.clear_form()
+		self.entries = self._create_form()

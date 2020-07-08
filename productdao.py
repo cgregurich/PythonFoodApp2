@@ -27,6 +27,28 @@ class ProductDAO:
 				:foodname, :amount, :unit, :cost, :key
 				)""", new_dict)
 
+	def update_product(self, product):
+		"""
+		foodname -> str
+		product -> Product object
+		"""
+		key = self._get_product_keys_with_name(product.foodname)[0]
+		new_dict = {'foodname': product.foodname, 'amount': product.amount,
+			'unit': product.unit, 'cost': product.cost, 'key':key}
+		with self.conn:
+			self.c.execute("""UPDATE products SET foodname=:foodname, amount=:amount, 
+				unit=:unit, cost=:cost, key=:key WHERE foodname=:foodname""", new_dict)
+		return self.c.rowcount
+
+
+
+	def delete_product_by_foodname(self, foodname):
+		with self.conn:
+			self.c.execute("DELETE FROM products WHERE foodname = ?", (foodname,))
+		return self.c.rowcount
+
+
+
 	def delete_product_by_key(self, key):
 		"""Tries to delete the product that has the param key."""
 		with self.conn:
@@ -71,6 +93,14 @@ class ProductDAO:
 		products = self._convert_to_products_list(tup_list)
 		return products
 
+	def retrieve_all_products_as_dict(self):
+		"""Returns dictionary of format: {product1name: <product object>, product2name: <product object>}"""
+		products = self.retrieve_all_products()
+		p_dict = {}
+		for p in products:
+			p_dict[p.foodname] = p
+		return p_dict
+
 	def _convert_to_products_list(self, tup_list):
 		"""Helper method for retrieve_all_products()
 		Takes a list of tuples as arg.
@@ -84,9 +114,39 @@ class ProductDAO:
 			products.append(new_product)
 		return products
 
+	def _get_product_keys_with_name(self, name):
+		"""Takes str name as arg. Returns a list of keys for all
+		rows in the DB where foodname matches arg name."""
+		with self.conn:
+			self.c.execute("SELECT key FROM products WHERE foodname=?", (name,))
+			tup_list = self.c.fetchall()
+		key_list = [tup[0] for tup in tup_list]
+		return key_list
 
 
 
+	def _retrieve_product_by_key(self, key):
+		"""Takes arg key. Searches DB for the row where the key column matches
+		the arg key. If the key is not in the DB, returns None.
+		Else returns a Product object."""
+		all_keys = self.get_all_keys()
+		if key not in all_keys:
+			return None
+		with self.conn:
+			self.c.execute("SELECT * FROM products WHERE key=?", (key,))
+			tup_list = self.c.fetchall()
+		product = self._convert_to_products_list(tup_list)
+		return product[0]
+
+
+	def retrieve_products_by_name(self, name):
+		"""Takes arg name and returns a list of Product objects 
+		whose name column matches arg name"""
+		keys = self._get_product_keys_with_name(name)
+		products_list = []
+		for key in keys:
+			products_list.append(self._retrieve_product_by_key(key))
+		return products_list
 
 
 	# for testing, prob not a useful func

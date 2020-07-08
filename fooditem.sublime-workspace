@@ -1,0 +1,361 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 358.0,
+		"history":
+		[
+			"view.settings().get(\"color_scheme\")"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/colin/Desktop/codeforces_python/newyearcandles_379A.py",
+		"/C/Users/colin/Desktop/codeforces_python/datacenter_1250F.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/testing_product.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/productdao.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/product.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/fooditemdao.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/fooditem.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/utilities.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodtextuserinterface.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/textuserinterface.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodapp_gui.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/startpage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/viewproductspage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/calcdailyamounts.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/viewfoodspage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/mealdao.py",
+		"/C/Users/colin/Desktop/menustuff.py",
+		"/C/Users/colin/Desktop/codeforces_python/bearandbigbrother_791A.py",
+		"/C/Users/colin/Desktop/space_removal.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/space_removal",
+		"/C/Users/colin/Desktop/title.py",
+		"/C/Users/colin/Desktop/codeforces_python/signflipping_1375A.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/fooditem.db",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodapp_main.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/pricesdao.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/products.db",
+		"/C/Users/colin/Desktop/codeforces_python/learning_stack.py",
+		"/C/Users/colin/Desktop/codeforces_python/learning_dfs.py",
+		"/C/Users/colin/Desktop/codeforces_python/newyeartransportation_500A.py",
+		"/C/Users/colin/Desktop/codeforces_python/500A_attempt2.py",
+		"/C/Users/colin/Desktop/codeforces_python/xeniaandringroad_339B.py",
+		"/C/Users/colin/Desktop/codeforces_python/xeniaandringroad_339B",
+		"/C/Users/colin/Desktop/codeforces_python/dragons_230A.py",
+		"/C/Users/colin/Desktop/codeforces_python/expression_479A.py",
+		"/C/Users/colin/Desktop/codeforces_python/131A_caps_lock.py",
+		"/C/Users/colin/Desktop/codeforces python/131A_caps_lock.py",
+		"/C/Users/colin/Desktop/codeforces python/131A_caps_lock",
+		"/C/Users/colin/Desktop/PythonFoodApp2/addmealpage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/test_fooditem.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/menu_view.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/addfoodspage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodspricepage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/calculatemacros.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/mealframe.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/displaydaily.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/viewmealspage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/ViewFoodsPage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/mealtextuserinterface.py",
+		"/C/Users/colin/Desktop/Folders of Folders/PythonWork/learning_selenium.py",
+		"/C/Users/colin/Desktop/Folders of Folders/PythonWork/my_selenium.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/learning_selenium.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/meal.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/messing_with_cells.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/todo.txt",
+		"/C/Users/colin/Desktop/PythonFoodApp2/test_meal_dao.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/test_fooditem_dao.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/addfoods.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/mealspageold.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/calcmacros.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodspage.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/displayallfoods.py",
+		"/C/Users/colin/Desktop/531 GUI/531gui.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/throwawaycustomtable.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/testestertrte.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/gui_using_tkintertable.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/todomarkdown.md",
+		"/C/Users/colin/Desktop/531 GUI/settings.py",
+		"/C/Users/colin/Desktop/531 GUI/531guiclasses.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/531gui.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/foodscontroller.py",
+		"/C/Users/colin/Desktop/PythonFoodApp2/graphicaluserinterface.py",
+		"/C/Users/colin/Desktop/LearningTKinter/one.py",
+		"/C/Users/colin/Desktop/LearningTKinter/images_kinter.py",
+		"/C/Users/colin/Desktop/LearningTKinter/calculator.py",
+		"/C/Users/colin/Desktop/alien_invasion/alien.py",
+		"/C/Users/colin/Desktop/alien_invasion/alien_invasion.py",
+		"/C/Users/colin/Desktop/alien_invasion/ship.py",
+		"/C/Users/colin/Desktop/alien_invasion/bullet.py",
+		"/C/Users/colin/Desktop/alien_invasion/button.py",
+		"/C/Users/colin/Desktop/alien_invasion/scoreboard.py",
+		"/C/Users/colin/Desktop/alien_invasion/game_stats.py",
+		"/C/Users/colin/Desktop/alien_invasion/settings.py",
+		"/C/Users/colin/Desktop/pygame_test/SidewaysShooter/bullet.py",
+		"/C/Users/colin/Desktop/pygame_test/SidewaysShooter/gun.py",
+		"/C/Users/colin/Desktop/pygame_test/SidewaysShooter/shooter_settings.py",
+		"/C/Users/colin/Desktop/pygame_test/SidewaysShooter/sideways_shooter.py",
+		"/C/Users/colin/Desktop/pygame_test/SidewaysShooter/bandit.py",
+		"/C/Users/colin/Desktop/pygame_test/sideways_shooter.py",
+		"/C/Users/colin/Desktop/pygame_test/bandit.py",
+		"/C/Users/colin/Desktop/pygame_test/gun.py",
+		"/C/Users/colin/Desktop/pygame_test/bullet.py",
+		"/C/Users/colin/Desktop/pygame_test/shooter_settings.py",
+		"/C/Users/colin/Desktop/pygame_test/raindrop.py",
+		"/C/Users/colin/Desktop/pygame_test/rain_settings.py",
+		"/C/Users/colin/Desktop/pygame_test/raindrops.py",
+		"/C/Users/colin/Desktop/pygame_test/stars.py",
+		"/C/Users/colin/Desktop/pygame_test/star.py",
+		"/C/Users/colin/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/colin/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/colin/Desktop/pygame_test/settings.py",
+		"/C/Users/colin/Desktop/pygame_test/booter.py",
+		"/C/Users/colin/Desktop/pygame_test/test_game.py",
+		"/C/Users/colin/Desktop/Folders of Folders/PythonWork/time_calc.py",
+		"/C/Users/colin/Desktop/LearningTkinter/image_viewer.py",
+		"/C/Users/colin/Desktop/PythonWork/testing.py",
+		"/C/Users/colin/Desktop/PythonWork/dicttest.py",
+		"/C/Users/colin/Desktop/foodapp/tester_user_input.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Python Crash Course/Chapter 3/conditions.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Python Crash Course/Chapter 3/tuples.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Python Crash Course/Chapter 3/YourOwnList.py",
+		"/C/Users/colin/Desktop/PythonWork/loops2.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Python Crash Course/Chapter 3/greetings.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Python Crash Course/Chapter 3/names.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Lists.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/NumberEight.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Spruce.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/HelloWorld2.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/Name.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/fibonacci.py",
+		"/C/Users/colin/Documents/Sublime Python Programs/test.py",
+		"/C/Users/colin/AppData/Roaming/Sublime Text 3/Packages/User/Python.sublime-build",
+		"/C/Users/colin/AppData/Roaming/Sublime Text 3/Packages/User/untitled.sublime-build",
+		"/C/Users/colin/Desktop/eggbot/bot.py"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"()\n",
+			"ViewProductsPage",
+			" \"",
+			"btn_clear",
+			"i",
+			"labels",
+			"class",
+			"foodspage",
+			"optionmenu",
+			"adder['var']",
+			"option",
+			"FoodsPage",
+			"MealFrame",
+			"calculatemacros",
+			"*",
+			"*|",
+			"*",
+			"optiommenu_select_meal",
+			"DISABLED",
+			"1",
+			"green",
+			"MealsPageOld",
+			"'],",
+			"MealsPage",
+			"btn_meals_old",
+			"old",
+			"=\"-\")",
+			"',\n",
+			"startpage",
+			"grid",
+			"\t\t\t\t\t\t\t\t\t\t\t\t ",
+			"  \",",
+			"      \",",
+			"25",
+			"all_foods",
+			"_create_cells",
+			"update_all_foods",
+			"_set_sheet_foods",
+			"b_row",
+			"frame_btns",
+			"sheet_food",
+			"()\n",
+			"set_info_from_string_list",
+			"max_lengths",
+			"0",
+			"fooditemsdao",
+			"self.max",
+			"print",
+			"Button",
+			"):\n",
+			")\n",
+			"()\n",
+			"ship_limit",
+			", ",
+			"_check_bullet_alien_collisions",
+			")\n",
+			"fleet",
+			"complete"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"cells",
+			"_draw_sheet",
+			"_update_sheet_foods",
+			"last_row",
+			"frame_controls",
+			"col_lengths",
+			"ttk.Button"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 317.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/Python.sublime-build",
+	"project": "fooditem.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

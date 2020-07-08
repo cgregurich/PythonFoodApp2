@@ -42,7 +42,7 @@ class Product:
 			raise ValueError("Cost must be number.")
 
 		self.info['amount'] = int(self.amount)
-		self.info['cost'] = "{:.2f}".format(float(self.cost))
+		self.info['cost'] = float("{:.2f}".format(float(self.cost)))
 	
 	def is_info_same(self, product):
 		"""Returns True if param product has the same

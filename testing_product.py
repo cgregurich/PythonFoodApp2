@@ -27,12 +27,17 @@ def ask_for_prices_of_foods_in_db():
 
 
 
-info_dict = {'foodname': 'oats', 'amount': 1176, 'unit': 'g', 'cost': '2.67'}
+info_dict = {'foodname': 'kale', 'amount': 400, 'unit': 'g', 'cost': '2.98'}
 
 p = Product(info_dict)
 
 fooditemdao = FoodItemDAO()
 productdao = ProductDAO()
+
+print(type(p.foodname))
+print(type(p.amount))
+print(type(p.unit))
+print(type(p.cost))
 
 # productdao.insert_product(p)
 
@@ -43,5 +48,13 @@ productdao = ProductDAO()
 # p1 = user_input_product()
 # print(p1)
 
-ask_for_prices_of_foods_in_db()
+# keys = productdao._get_product_keys_with_name('kale')
+# print(f"kale keys: {keys}")
+# # product = productdao._retrieve_product_by_key(keys[0])
+# product = productdao._retrieve_product_by_key('notakey')
+# print(product)
+# products_list = productdao.retrieve_products_by_name('kale')
+# for p in products_list:
+# 	print(p)
+
 
