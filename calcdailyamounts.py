@@ -50,7 +50,7 @@ class CalcDailyAmounts(Frame):
 
 		self.col_widths = []
 		self.header_entries = []
-		self.headers = ('food name', 'amt/unit', 'cost/unit', 'units needed', 'inventory', 'order', 'actual cost')
+		self.headers = ('food name', 'amt needed', 'amt/unit', 'cost/unit', 'units needed', 'inventory', 'order', 'actual cost')
 		
 
 		self.cells = {} # dictionary of row entry objects
@@ -81,7 +81,7 @@ class CalcDailyAmounts(Frame):
 		if not self.rows: # DB is empty
 			return
 
-		row_names = ['foodname', 'amtunit', 'cost', 'need', 'have', 'order', 'actual_cost']
+		row_names = ['foodname', 'amtneeded', 'amtunit', 'cost', 'need', 'have', 'order', 'actual_cost']
 
 		for i in range(len(self.headers)):
 			max_width = self.col_widths[i]
@@ -111,7 +111,8 @@ class CalcDailyAmounts(Frame):
 			row = {}
 			product = productdao.retrieve_products_by_name(name)[0]
 			row['foodname'] = product.foodname
-			row['amtunit'] = f"{name_amt_dict[product.foodname]} {product.unit}"
+			row['amtneeded'] = f"{name_amt_dict[product.foodname]} {product.unit}"
+			row['amtunit'] = f"{product.amount} {product.unit}"
 			row['cost'] = "${:.2f}".format(product.cost)
 			row['need'] = self._calc_need(name_amt_dict[product.foodname], product.foodname)
 			row['have'] = 0
