@@ -352,6 +352,7 @@ class AddMealPage(Frame):
 
 		# Check if user changed meal's name
 		old_name = self.selected_meal.get()
+		
 
 		# Check that new meal_name is unique and that meal_name actually changed
 		if meal_name in mealdao.retrieve_all_meal_names() and meal_name != old_name:
@@ -362,6 +363,8 @@ class AddMealPage(Frame):
 			mealdao.update_meal_names_of_foods((meal_name, old_name))
 		self._overwrite_meal(meal_name)
 		self.display_food_nutrition()
+		self._refresh_meal_option_menu()
+		self.selected_meal.set(meal_name)
 			
 
 		
@@ -370,6 +373,7 @@ class AddMealPage(Frame):
 		Then creates a new Meal object from the window
 		and adds that Meal to the DB."""
 		mealdao.delete_meal(meal_name)
+		
 
 
 		foods = self.get_foods_from_adders()
@@ -565,6 +569,7 @@ class AddMealPage(Frame):
 		self.entry_meal_name.config(state=NORMAL)
 		self.entry_meal_name.delete(0, END)
 		
+
 
 
 	def reset(self):

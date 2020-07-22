@@ -70,6 +70,18 @@ class CalcDailyAmounts(Frame):
 			self.header_entries.append(e)
 
 
+		self.header_entries[7].config(state=NORMAL)
+		self.header_entries[7].delete(0, END)
+		if self.rb_var.get() == 1:
+			self.header_entries[7].insert(0, "DAILY COST")
+
+		elif self.rb_var.get() == 14:
+			self.header_entries[7].insert(0, "ROUNDED COST")
+
+		self.header_entries[7].config(state=DISABLED)
+
+
+
 	def _calc_col_widths(self):
 		self.col_widths = []
 		for i in range(len(self.headers)):
@@ -143,9 +155,6 @@ class CalcDailyAmounts(Frame):
 
 	def _calc_total_cost(self):
 		total = 0
-		
-
-
 		for row in self.cells.values():
 			total += self._calc_cost(row)
 		return "${:.2f}".format(total)
@@ -234,6 +243,7 @@ class CalcDailyAmounts(Frame):
 			ceil_order = math.ceil(float(row['order'].get()))
 			cost_per_unit = float(row['cost'].get()[1:])
 			cost = ceil_order * cost_per_unit
+			
 		# 1 day selected. 
 		# if 1 day selected, then display cost of one day
 		# of eating; unrealistic number because of limiting
