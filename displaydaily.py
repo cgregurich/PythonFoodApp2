@@ -32,7 +32,7 @@ class DisplayDaily(Frame):
 
 
 
-		btn_back = ttk.Button(self, text="Back", command=lambda: controller.show_frame(viewmealspage.ViewMealsPage))
+		btn_back = ttk.Button(self, text="Back", command=lambda: controller.show_frame("ViewMealsPage"))
 
 
 		self.lbl_title = Label(self.frame_title, text="Daily Nutrition", font=LARGE_FONT)

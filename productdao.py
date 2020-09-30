@@ -11,20 +11,18 @@ class ProductDAO:
 		self.conn = sqlite3.connect(db_name)
 		self.c = self.conn.cursor()
 		self.c.execute("""CREATE TABLE IF NOT EXISTS products (
-			foodname text, amount integer, unit text, cost real, key text
-			)""")
+			foodname text, amount integer, unit text, cost real, calpercost integer)""")
 		self.conn.commit()
 
 
 
 	def insert_product(self, product):
 		"""Inserts param Product into the db."""
-		key = self.generate_unique_key()
 		new_dict = {'foodname': product.foodname, 'amount': product.amount,
-			 'unit': product.unit, 'cost': product.cost, 'key': key}
+			 'unit': product.unit, 'cost': product.cost, 'calpercost': product.calpercost}
 		with self.conn:
 			self.c.execute("""INSERT INTO products VALUES(
-				:foodname, :amount, :unit, :cost, :key
+				:foodname, :amount, :unit, :cost, :calpercost
 				)""", new_dict)
 
 	def update_product(self, product):
@@ -32,12 +30,11 @@ class ProductDAO:
 		foodname -> str
 		product -> Product object
 		"""
-		key = self._get_product_keys_with_name(product.foodname)[0]
 		new_dict = {'foodname': product.foodname, 'amount': product.amount,
-			'unit': product.unit, 'cost': product.cost, 'key':key}
+			'unit': product.unit, 'cost': product.cost, 'calpercost': product.calpercost}
 		with self.conn:
 			self.c.execute("""UPDATE products SET foodname=:foodname, amount=:amount, 
-				unit=:unit, cost=:cost, key=:key WHERE foodname=:foodname""", new_dict)
+				unit=:unit, cost=:cost, calpercost=:calpercost WHERE foodname=:foodname""", new_dict)
 		return self.c.rowcount
 
 
@@ -49,32 +46,21 @@ class ProductDAO:
 
 
 
-	def delete_product_by_key(self, key):
-		"""Tries to delete the product that has the param key."""
-		with self.conn:
-			self.c.execute("DELETE FROM products WHERE key = ?", (key,))
-		return self.c.rowcount
 
-	def generate_unique_key(self):
-		k = []
-		while len(k) < 10:
-			l_u = random.randint(0, 1)
-			c = chr(random.randint(65, 90))
-			if l_u == 0:
-				c = c.lower()
-			k.append(c)
-		key = "".join(k)
-		if key in self.get_all_keys():
-			key = self.generate_unique_key()
-		return key
 
-	def get_all_keys(self):
-		with self.conn:
-			self.c.execute("""SELECT key FROM products""")
-			keys_tup_list = self.c.fetchall()
-		# return a list of keys instead of a list of tuples
-		keys = [item[0] for item in keys_tup_list]
-		return keys
+	# def generate_unique_key(self):
+	# 	k = []
+	# 	while len(k) < 10:
+	# 		l_u = random.randint(0, 1)
+	# 		c = chr(random.randint(65, 90))
+	# 		if l_u == 0:
+	# 			c = c.lower()
+	# 		k.append(c)
+	# 	key = "".join(k)
+	# 	if key in self.get_all_keys():
+	# 		key = self.generate_unique_key()
+	# 	return key
+
 
 	def retrieve_all_foodnames(self):
 		"""Returns a list of all Product's foodnames from products table in DB."""
@@ -114,39 +100,22 @@ class ProductDAO:
 			products.append(new_product)
 		return products
 
-	def _get_product_keys_with_name(self, name):
-		"""Takes str name as arg. Returns a list of keys for all
-		rows in the DB where foodname matches arg name."""
-		with self.conn:
-			self.c.execute("SELECT key FROM products WHERE foodname=?", (name,))
-			tup_list = self.c.fetchall()
-		key_list = [tup[0] for tup in tup_list]
-		return key_list
 
 
 
-	def _retrieve_product_by_key(self, key):
-		"""Takes arg key. Searches DB for the row where the key column matches
-		the arg key. If the key is not in the DB, returns None.
-		Else returns a Product object."""
-		all_keys = self.get_all_keys()
-		if key not in all_keys:
-			return None
-		with self.conn:
-			self.c.execute("SELECT * FROM products WHERE key=?", (key,))
-			tup_list = self.c.fetchall()
-		product = self._convert_to_products_list(tup_list)
-		return product[0]
 
 
-	def retrieve_products_by_name(self, name):
+	def retrieve_product_by_name(self, name):
 		"""Takes arg name and returns a list of Product objects 
 		whose name column matches arg name"""
-		keys = self._get_product_keys_with_name(name)
-		products_list = []
-		for key in keys:
-			products_list.append(self._retrieve_product_by_key(key))
-		return products_list
+		with self.conn:
+			self.c.execute("""SELECT * FROM products WHERE foodname=?""", (name, ))
+			fetched_info = self.c.fetchone()
+			if fetched_info is None:
+				return None
+			product = Product()
+			product.set_info_from_tuple(fetched_info)
+		return product
 
 
 	# for testing, prob not a useful func
@@ -162,17 +131,7 @@ class ProductDAO:
 				print(t)
 
 
-	def _is_product_unique(self, product):
-		"""Checks if param product is unique in the DB.
-		i.e. if another product exists with same name, 
-		amount, unit, and cost, returns False.
-		Otherwise returns True.
-		This is to deal with hard duplicates, but still
-		allow soft duplicates (same name, same unit, different
-		cost and amount)"""
 
-		# for p in self.
-		pass
 
 
 

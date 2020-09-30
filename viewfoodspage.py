@@ -44,7 +44,7 @@ class ViewFoodsPage(Frame):
 
 
 		# Create controls
-		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage)) 
+		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame("StartPage")) 
 		
 		# Label for displaying that changes were saved
 		self.lbl_status = Label(self.frame_controls, text="", fg="green")		

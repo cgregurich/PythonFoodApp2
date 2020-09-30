@@ -50,7 +50,7 @@ class CalcDailyAmounts(Frame):
 
 		self.col_widths = []
 		self.header_entries = []
-		self.headers = ('food name', 'amt needed', 'amt/unit', 'cost/unit', 'units needed', 'inventory', 'order', 'actual cost')
+		self.headers = ('food name', 'amt needed', 'amt/product', 'cost/product', 'products needed', 'inventory(product)', 'inventory (unit)',  'order', 'actual cost')
 		
 
 		self.cells = {} # dictionary of row entry objects
@@ -58,6 +58,41 @@ class CalcDailyAmounts(Frame):
 		self.rows = {} # dictionary of row data
 
 		self.draw_page()
+
+
+	def draw_page(self):
+		self._calc_col_widths()
+		self._draw_headers()
+		self._init_rows()
+		if not self.rows: # DB is empty
+			return
+		self._draw_rows()
+		self.draw_orders()
+		self.draw_costs()
+		self.draw_total_cost()
+		self._disable_cells()
+
+
+	def _calc_col_widths(self):
+		self.col_widths = []
+		for i in range(len(self.headers)):
+			self.col_widths.append(len(self.headers[i]))
+
+		
+		COL_PAD = 3
+		
+		if not self.rows: # DB is empty
+			return
+
+		# col_names = ['foodname', 'amtneeded', 'amtunit', 'cost', 'need', 'have', 'order', 'actual_cost']
+		col_names = ['foodname', 'amtneeded', 'amtunit', 'cost', 'need', 'have1', 'have2', 'order', 'actual_cost']
+
+		for i in range(len(self.headers)):
+			max_width = self.col_widths[i]
+			for r in self.rows.values():
+				max_width = max(max_width, len(str(r[col_names[i]])))
+
+			self.col_widths[i] = max_width + COL_PAD
 
 
 	def _draw_headers(self):
@@ -81,26 +116,31 @@ class CalcDailyAmounts(Frame):
 		self.header_entries[7].config(state=DISABLED)
 
 
+	def _init_rows(self):
+		"""Returns a dictionary representing the rows to be
+		drawn to the page."""
+		self.rows = {}
+		all_products = productdao.retrieve_all_products()
+		if not all_products:
+			return None
+		foodnames = mealdao.retrieve_all_food_names_set()
+		name_amt_dict = self._create_food_dict()
+		for name in foodnames:
+			row = {}
+			product = productdao.retrieve_product_by_name(name)
+			row['foodname'] = product.foodname
+			row['amtneeded'] = f"{name_amt_dict[product.foodname]} {product.unit}"
+			row['amtunit'] = f"{product.amount} {product.unit}"
+			row['cost'] = "${:.2f}".format(product.cost)
+			row['need'] = self._calc_need(name_amt_dict[product.foodname], product.foodname)
+			row['have1'] = 0
+			row['have2'] = 0
+			row['order'] = 0
+			row['actual_cost'] = "${:.2f}".format(0.00)
+			self.rows[product.foodname] = row
 
-	def _calc_col_widths(self):
-		self.col_widths = []
-		for i in range(len(self.headers)):
-			self.col_widths.append(len(self.headers[i]))
 
-		
-		COL_PAD = 3
-		
-		if not self.rows: # DB is empty
-			return
-
-		row_names = ['foodname', 'amtneeded', 'amtunit', 'cost', 'need', 'have', 'order', 'actual_cost']
-
-		for i in range(len(self.headers)):
-			max_width = self.col_widths[i]
-			for r in self.rows.values():
-				max_width = max(max_width, len(str(r[row_names[i]])))
-
-			self.col_widths[i] = max_width + COL_PAD
+	
 
 	def _create_food_dict(self):
 		"""Returns a dictionary of format:
@@ -112,35 +152,18 @@ class CalcDailyAmounts(Frame):
 		return food_dict
 
 
-	def _init_rows(self):
-		"""Returns a dictionary representing the rows to be
-		drawn to the page."""
-		self.rows = {}
-		all_products = productdao.retrieve_all_products()
-		foodnames = mealdao.retrieve_all_food_names_set()
-		name_amt_dict = self._create_food_dict()
-		for name in foodnames:
-			row = {}
-			product = productdao.retrieve_products_by_name(name)[0]
-			row['foodname'] = product.foodname
-			row['amtneeded'] = f"{name_amt_dict[product.foodname]} {product.unit}"
-			row['amtunit'] = f"{product.amount} {product.unit}"
-			row['cost'] = "${:.2f}".format(product.cost)
-			row['need'] = self._calc_need(name_amt_dict[product.foodname], product.foodname)
-			row['have'] = 0
-			row['order'] = 0
-			row['actual_cost'] = "${:.2f}".format(0.00)
-			self.rows[product.foodname] = row
+	
 
 
 
 	def _calc_need(self, amt, foodname):
-		product = productdao.retrieve_products_by_name(foodname)[0]
-		try:
-			need = amt / product.amount
-		except ZeroDivisionError:
-			need = 0
-		return "{:.2f}".format(need)
+		product = productdao.retrieve_product_by_name(foodname)
+		if product:
+			try:
+				need = amt / product.amount
+			except ZeroDivisionError:
+				need = 0
+			return "{:.2f}".format(need)
 
 
 
@@ -190,17 +213,7 @@ class CalcDailyAmounts(Frame):
 
 		return food_dict
 
-	def draw_page(self):
-		self._calc_col_widths()
-		self._draw_headers()
-		self._init_rows()
-		if not self.rows: # DB is empty
-			return
-		self._draw_rows()
-		self.draw_orders()
-		self.draw_costs()
-		self.draw_total_cost()
-		self._disable_cells()
+	
 
 	def _draw_rows(self):
 		grid_row = 1
@@ -276,10 +289,14 @@ class CalcDailyAmounts(Frame):
 		# otherwise take data from cell
 		if not self._is_have_valid(row):
 			have = 0
-			row['have'].delete(0, END)
-			row['have'].insert(0, 0)
+			row['have1'].delete(0, END)
+			row['have1'].insert(0, 0)
 		else:
-			have = float(row['have'].get())	
+			# figure out which 'have' cell was filled out
+			if row['have1'].get(): # number of products entered
+				have = float(row['have1'].get())
+			else: # unit of measurement of food entered
+				have = float(row['have2'].get())
 
 		order = need - have
 		if need - have < 0:
@@ -287,7 +304,13 @@ class CalcDailyAmounts(Frame):
 		return "{:.2f}".format(order)
 
 	def _is_have_valid(self, row):
-		have = row['have'].get()
+		"""Validates have entries: either has to be filled out, and the info has to be 
+		a valid float/integer"""
+		if row['have1'].get():
+			have = row['have1'].get()
+		else:
+			row['have2'].get()
+		
 		try:
 			float(have)
 		except ValueError:
@@ -302,7 +325,7 @@ class CalcDailyAmounts(Frame):
 		have been modified."""
 		for row in self.cells.values():
 			for key in row.keys():
-				if key == 'have':
+				if key == 'have1' or key == 'have2':
 					continue
 				else:
 					row[key].config(state=DISABLED)

@@ -37,12 +37,12 @@ class ViewMealsPage(Frame):
 		self.meal_index = 0
 
 		self.headers = ('ss', 'unit', 'cal', 'carb', 'fat', 'protein', 'fiber', 'sugar')
-		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage))
+		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame("StartPage"))
 		self.btn_prev = ttk.Button(self.frame_controls, text="Previous", command=lambda: self.change_meal("prev"))
 		self.btn_next = ttk.Button(self.frame_controls, text="Next", command=lambda: self.change_meal("next"))
 		self.btn_del = ttk.Button(self.frame_controls, text="Delete Meal", command=self.delete_clicked)
 		self.btn_view_nutrition = ttk.Button(self.frame_controls, text="View Day Total", 
-										command=lambda: controller.show_frame(displaydaily.DisplayDaily))
+										command=lambda: controller.show_frame("DisplayDaily"))
 
 		self.viewing_meals = True
 

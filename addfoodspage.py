@@ -13,7 +13,7 @@ class AddFoodsPage(Frame):
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 
-		btn_back = ttk.Button(self, text="Back", command=lambda: controller.show_frame(startpage.StartPage))
+		btn_back = ttk.Button(self, text="Back", command=lambda: controller.show_frame("StartPage"))
 		btn_back.grid(row=0, column=0)
 
 		self.entries = self._create_form()
@@ -55,11 +55,7 @@ class AddFoodsPage(Frame):
 
 	def add_food(self):
 		self._clear_error_labels()
-
-		
 		self._create_info_tuple()
-
-
 		if self.validate_form():
 
 			# get info to create FoodItem from form
@@ -73,6 +69,7 @@ class AddFoodsPage(Frame):
 			if not self._is_name_unique(food):
 				return False
 
+			
 			fooditemdao.insert_food(food)
 
 			self._add_food_to_product_db(food)
@@ -86,7 +83,7 @@ class AddFoodsPage(Frame):
 		productdao.insert_product(p)
 
 	def _create_product_from_food(self, food):
-		info = {'foodname': food.name, 'amount': 0, 'unit': food.unit, 'cost': 0.00}
+		info = {'foodname': food.name, 'amount': 0, 'unit': food.unit, 'cost': 0.00, 'calpercost': 0}
 		product = Product(info)
 		return product
 

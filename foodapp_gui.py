@@ -19,7 +19,7 @@ from viewfoodspage import ViewFoodsPage
 from addmealpage import AddMealPage
 from displaydaily import DisplayDaily
 from foodspricepage import FoodsPricePage
-from calcdailyamounts import CalcDailyAmounts
+from groceryform import GroceryForm
 from viewproductspage import ViewProductsPage
 
 
@@ -47,17 +47,17 @@ class FoodApp(Tk):
 		self.frames = {}
 
 
-		
+
 		for F in (StartPage, ViewMealsPage, AddFoodsPage, ViewFoodsPage, AddMealPage,
-					DisplayDaily, FoodsPricePage, CalcDailyAmounts, ViewProductsPage):
+					DisplayDaily, FoodsPricePage, GroceryForm, ViewProductsPage):
 			
 			frame = F(container, self)
 
-			self.frames[F] = frame
+			self.frames[F.__name__] = frame
 
 			frame.grid(row=0, column=0, sticky="nsew")
 
-		self.show_frame(StartPage)
+		self.show_frame("StartPage")
 
 
 	def show_frame(self, cont):

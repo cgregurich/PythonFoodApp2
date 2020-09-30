@@ -7,7 +7,7 @@ unit of measurement for the amount, and cost per product.
 class Product:
 	def __init__(self, info_dict=None):
 		self.info = {'foodname': None, 'amount': None, 'unit': None,
-				'cost': None}
+				'cost': None, 'calpercost': None}
 		if info_dict:
 			for key in self.info.keys():
 				self.info[key] = info_dict[key]
@@ -75,4 +75,8 @@ class Product:
 	@property
 	def cost(self):
 		return self.info['cost']
+
+	@property
+	def calpercost(self):
+		return self.info['calpercost']
 

@@ -62,7 +62,7 @@ class AddMealPage(Frame):
 		# frame_controls -> create controls
 		self.lbl_status = Label(self.frame_controls, text="", fg="green")
 
-		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame(startpage.StartPage))
+		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: controller.show_frame("StartPage"))
 		btn_new_adder = ttk.Button(self.frame_controls, text="Add Food", command=self.create_adder)
 		btn_clear_page = ttk.Button(self.frame_controls, text="Clear Page", command=self.reset)
 		btn_calc = ttk.Button(self.frame_controls, text="Calculate", command=self.display_food_nutrition)

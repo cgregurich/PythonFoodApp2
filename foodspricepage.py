@@ -12,7 +12,7 @@ class FoodsPricePage(Frame):
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 
-		ttk.Button(self, text="Back", command=lambda: controller.show_frame(startpage.StartPage)).grid(row=0, column=0)
+		ttk.Button(self, text="Back", command=lambda: controller.show_frame("StartPage")).grid(row=0, column=0)
 
 		ttk.Button(self, text="Run it", command=self.run_it_clicked).grid(row=0, column=1)
 

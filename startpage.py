@@ -8,7 +8,7 @@ from viewmealspage import ViewMealsPage
 from addmealpage import AddMealPage
 from addfoodspage import AddFoodsPage
 from foodspricepage import FoodsPricePage
-from calcdailyamounts import CalcDailyAmounts
+from groceryform import GroceryForm
 from viewproductspage import ViewProductsPage
 
 
@@ -20,19 +20,19 @@ class StartPage(Frame):
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 
-		btn_add_food = ttk.Button(self, text="Add Food", command=lambda: controller.show_frame(AddFoodsPage))
+		btn_add_food = ttk.Button(self, text="Add Food", command=lambda: controller.show_frame("AddFoodsPage"))
 		
-		btn_view_foods = ttk.Button(self, text="View Foods", command=lambda: controller.show_frame(ViewFoodsPage))
+		btn_view_foods = ttk.Button(self, text="View Foods", command=lambda: controller.show_frame("ViewFoodsPage"))
 
-		btn_add_meals = ttk.Button(self, text="Add Meal", command=lambda: controller.show_frame(AddMealPage))
+		btn_add_meals = ttk.Button(self, text="Edit Meals", command=lambda: controller.show_frame("AddMealPage"))
 
-		btn_view_meals = ttk.Button(self, text="View Meals", comman=lambda: controller.show_frame(ViewMealsPage))
+		btn_view_meals = ttk.Button(self, text="View Meals", comman=lambda: controller.show_frame("ViewMealsPage"))
 
-		btn_foods_price = ttk.Button(self, text="Foods Price (beta)", command=lambda: controller.show_frame(FoodsPricePage))
+		btn_foods_price = ttk.Button(self, text="Foods Price (beta)", command=lambda: controller.show_frame("FoodsPricePage"))
 
-		btn_calc_daily_amounts = ttk.Button(self, text="Calc Daily Amts (beta)", command=lambda: controller.show_frame(CalcDailyAmounts))
+		btn_calc_daily_amounts = ttk.Button(self, text="Groceries", command=lambda: controller.show_frame("GroceryForm"))
 
-		btn_view_products = ttk.Button(self, text="View Products", command=lambda: controller.show_frame(ViewProductsPage))
+		btn_view_products = ttk.Button(self, text="View Products", command=lambda: controller.show_frame("ViewProductsPage"))
 		
 
 		PADY = 5
