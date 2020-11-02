@@ -7,6 +7,7 @@ from tkinter import messagebox
 from fooditemdao import FoodItemDAO
 from mealdao import MealDAO
 from productdao import ProductDAO
+from grocerydao import GroceryDAO
 from utilities import *
 
 
@@ -66,6 +67,22 @@ class GroceryForm(Frame):
 
 		self.change_total_label()
 
+		self.overwrite_db()
+
+	def overwrite_db(self):
+		"""Each time go is clicked, the grocery db is cleared, and all the data
+		the user has entered in the grocery form is saved to the database.
+		Only if grocery form is set to two weeks"""
+		if self.rb_var.get() != "14":
+			return
+		grocerydao.clear_db()
+		food_names = mealdao.retrieve_all_food_names_set()
+		for row in self.row_widgets.values():
+			info = {"name": row["foodname"].get(), "amount": row["amtininventory"].get(), 
+					  "type": row["om_var"].get()}
+			grocerydao.insert_food(info)
+
+		
 
 	def is_row_valid(self, row):
 		"""Validates that input is a valid number and non-negative"""
@@ -197,6 +214,8 @@ class GroceryForm(Frame):
 		# Number of days to do calculations for; either 1 or 14
 		days = int(self.rb_var.get())
 
+		grocery_data = grocerydao.retrieve_data()
+
 		for name in all_food_names:
 			product = productdao.retrieve_product_by_name(name)
 			row_dict = {
@@ -205,13 +224,14 @@ class GroceryForm(Frame):
 				'amtperproduct': f"{round(product.amount, 2)} {product.unit}",
 				'costperproduct': "${:.2f}".format(product.cost),
 				'numproductsneeded': self.calc_num_products_needed(name, days),
-				'amtininventory': 0, # this is for user input, it has no value to start with
-				'inventorytype': 'product',
+				# Grabs the saved data from previous runs of the program
+				# and fills the row's data with it
+				'amtininventory': grocery_data[name]["amount"], 
+				'inventorytype': grocery_data[name]["type"],
 				'howmanytoorder': 0,
 				'costoforder': "${:.2f}".format(0),
 			}
 			self.row_data[name] = row_dict
-		# print(self.row_data['rice'])
 
 
 	def calc_daily_amount_needed(self, food_name, days):
@@ -281,6 +301,7 @@ class GroceryForm(Frame):
 
 	def draw_row(self, row_dict):
 		"""row_dict is a dictionary representing the data of a row"""
+		grocery_data = grocerydao.retrieve_data()
 		row_widgets = {}
 		col = 0
 		for key, value in row_dict.items():
@@ -290,6 +311,7 @@ class GroceryForm(Frame):
 				unit = fooditemdao.retrieve_food(row_dict['foodname']).unit
 				widget = ttk.OptionMenu(self.frame_sheet, om_var, 'product', *('product', unit))
 				row_widgets['om_var'] = om_var
+				om_var.set(grocery_data[row_dict["foodname"]]["type"])
 
 			else:
 				widget = ttk.Entry(self.frame_sheet, font=MONOSPACED_FONT, foreground="black", width=self.col_widths[col])
