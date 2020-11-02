@@ -1,4 +1,6 @@
 .idea
 *.db
 __pycache__/
+testing.py
+
 
