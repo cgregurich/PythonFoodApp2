@@ -41,7 +41,7 @@ class GroceryForm(Frame):
 		btn_back = ttk.Button(self.frame_controls, text="Back", command=lambda: self.controller.show_frame("StartPage"))
 		btn_go = ttk.Button(self.frame_controls, text="Go", command=self.go_clicked)
 		self.rb_var = StringVar()
-		self.rb_var.set("1")
+		self.rb_var.set("14")
 		self.rb1 = ttk.Radiobutton(self.frame_controls, text="1 day", variable=self.rb_var, value="1", command=self.rb_clicked)
 		self.rb2 = ttk.Radiobutton(self.frame_controls, text="2 weeks", variable=self.rb_var, value="14", command=self.rb_clicked)
 
