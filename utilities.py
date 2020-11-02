@@ -3,6 +3,7 @@ from fooditem import FoodItem
 from mealdao import MealDAO
 from meal import Meal
 from productdao import ProductDAO
+from grocerydao import GroceryDAO
 from product import Product
 
 
@@ -23,4 +24,5 @@ MONOSPACED_BIG = ("Consolas", 11)
 fooditemdao = FoodItemDAO()
 mealdao = MealDAO()
 productdao = ProductDAO()
+grocerydao = GroceryDAO()
 
