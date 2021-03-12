@@ -215,7 +215,7 @@ class GroceryForm(Frame):
 		days = int(self.rb_var.get())
 
 		grocery_data = grocerydao.retrieve_data()
-
+		grocery_data = self.fix_grocery_data(grocery_data, all_food_names)
 		for name in all_food_names:
 			product = productdao.retrieve_product_by_name(name)
 			row_dict = {
@@ -232,6 +232,20 @@ class GroceryForm(Frame):
 				'costoforder': "${:.2f}".format(0),
 			}
 			self.row_data[name] = row_dict
+
+	def fix_grocery_data(self, grocery_data, food_names=None):
+		"""Should ideally go through the grocery_data dict, and for
+		each name in food_names, if the name doesn't exist, will put
+		starting values in the dict to avoid KeyErrors later"""
+		if not food_names:
+			food_names = mealdao.retrieve_all_food_names_set()
+		days = int(self.rb_var.get())
+		for name in food_names:
+			product = productdao.retrieve_product_by_name(name)
+			if name not in grocery_data:
+				inner_dict = {"amount": 0, "type": "product"}
+				grocery_data[name] = inner_dict
+		return grocery_data
 
 
 	def calc_daily_amount_needed(self, food_name, days):
@@ -302,6 +316,7 @@ class GroceryForm(Frame):
 	def draw_row(self, row_dict):
 		"""row_dict is a dictionary representing the data of a row"""
 		grocery_data = grocerydao.retrieve_data()
+		grocery_data = self.fix_grocery_data(grocery_data)
 		row_widgets = {}
 		col = 0
 		for key, value in row_dict.items():
@@ -312,7 +327,6 @@ class GroceryForm(Frame):
 				widget = ttk.OptionMenu(self.frame_sheet, om_var, 'product', *('product', unit))
 				row_widgets['om_var'] = om_var
 				om_var.set(grocery_data[row_dict["foodname"]]["type"])
-
 			else:
 				widget = ttk.Entry(self.frame_sheet, font=MONOSPACED_FONT, foreground="black", width=self.col_widths[col])
 				widget.insert(0, value)
@@ -340,9 +354,9 @@ class GroceryForm(Frame):
 		self.column_headers = []
 
 
-
 	def reset(self):
-		pass
+		self.clear_sheet()
+		self.draw_sheet()
 
 
 def main():

@@ -28,3 +28,4 @@ class GroceryDAO:
 		for tup in tup_list:
 			data[tup[0]] = {"amount": tup[1], "type": tup[2]}
 		return data
+

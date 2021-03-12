@@ -88,9 +88,6 @@ class AddMealPage(Frame):
 		self.entry_meal_name = ttk.Entry(self.frame_meal_name)
 		self.lbl_meal_name.grid(row=0, column=0, sticky=S)
 		self.entry_meal_name.grid(row=0, column=1, sticky=S)
-
-
-
 		self._init_frame_macros()
 
 
@@ -107,16 +104,11 @@ class AddMealPage(Frame):
 			self.macro_labels.append(lbl)
 
 
-
-
 	def show_clicked(self):
 		meal_name = self.selected_meal.get()
 		if meal_name == "Select Meal":
 			return False
 		self.is_show = True
-		
-		
-
 		self._clear_page()
 		self.draw_filled_form(meal_name)
 
@@ -132,8 +124,6 @@ class AddMealPage(Frame):
 		for food in meal.foods:
 			self.create_adder()
 
-		# self.entry_meal_name.config(state=NORMAL)
-		# self.entry_meal_name.delete(0, END)
 		self.entry_meal_name.insert(0, meal_name)
 
 		# Fill each adder
@@ -154,10 +144,6 @@ class AddMealPage(Frame):
 		self.display_meal_macros()
 		
 
-	
-
-
-
 
 	def create_adder(self):
 		"""Creates an adder:
@@ -169,8 +155,6 @@ class AddMealPage(Frame):
 		food_var = StringVar()
 		check_var = IntVar()
 
-
-
 		food_options = fooditemdao.retrieve_all_food_names()
 
 		# Create adder widgets
@@ -179,8 +163,6 @@ class AddMealPage(Frame):
 		lbl_amount = Label(new_frame, text="Amount:")
 		entry_amount = ttk.Entry(new_frame)
 		lbl_unit = Label(new_frame, text="unit")
-
-
 
 
 		# Create nutrition info headers
@@ -197,8 +179,6 @@ class AddMealPage(Frame):
 		lbl_protein = Label(new_frame, text="-", font=info_font)
 		lbl_fiber = Label(new_frame, text="-", font=info_font)
 		lbl_sugar = Label(new_frame, text="-", font=info_font)
-
-
 
 		# Put widgets in adder frame
 		check_del.grid(row=0, column=0, sticky=NE)
@@ -268,8 +248,6 @@ class AddMealPage(Frame):
 		each adder's unit label is then set to the appropriate label.
 		Not sure how to check which adder was interacted with, so it checks
 		all adders."""
-		
-
 		for adder in self.adders.values():
 			if adder['food_var'].get() != "Select Food": # a food has been selected
 				food = fooditemdao.retrieve_food(adder['food_var'].get())
@@ -309,6 +287,7 @@ class AddMealPage(Frame):
 		meal = Meal(meal_name, *foods)
 		mealdao.insert_meal(meal)
 
+
 		self.display_food_nutrition()
 
 		# Display message to user that disappears after time
@@ -317,11 +296,14 @@ class AddMealPage(Frame):
 
 		self._refresh_meal_option_menu()
 
+
 	def _is_duplicate_foods(self):
 		"""Displays error message and returns True if there is a duplicate food in the adders.
 		Else returns False"""
 
 		foods = self.get_foods_from_adders()
+		if not foods:
+			return True
 
 		food_names = []
 
@@ -348,12 +330,9 @@ class AddMealPage(Frame):
 		if ans == False:
 			return False
 
-
-
 		# Check if user changed meal's name
 		old_name = self.selected_meal.get()
 		
-
 		# Check that new meal_name is unique and that meal_name actually changed
 		if meal_name in mealdao.retrieve_all_meal_names() and meal_name != old_name:
 			messagebox.showerror("Duplicate Meal Name", f"Meal with name '{meal_name}' already exists")
@@ -373,9 +352,6 @@ class AddMealPage(Frame):
 		Then creates a new Meal object from the window
 		and adds that Meal to the DB."""
 		mealdao.delete_meal(meal_name)
-		
-
-
 		foods = self.get_foods_from_adders()
 		meal = Meal(meal_name)
 		meal.set_foods_from_list(foods)
@@ -401,9 +377,6 @@ class AddMealPage(Frame):
 				messagebox.showerror("Duplicate Meal Name", f"Meal with name '{meal_name}' already exists")
 			return False
 		return True
-
-	
-
 
 
 	def _get_index_of_adder(self, adder):
@@ -446,6 +419,7 @@ class AddMealPage(Frame):
 
 		return True
 
+
 	def _is_adder_unused(self, adder):
 		"""Checks if arg adder is completely empty.
 		i.e. no food selected and no amount entered, returns True.
@@ -454,6 +428,7 @@ class AddMealPage(Frame):
 		if adder['food_var'].get() == "Select Food" and adder['entry_amount'].get() == "":
 			return True
 		return False
+
 
 	def _calc_meal_macros(self):
 		"""Calculates the meal's nutrition based on the foods in the adders.
@@ -493,6 +468,7 @@ class AddMealPage(Frame):
 				meal_macros[i] = int(meal_macros[i])
 		return meal_macros
 
+
 	def display_meal_macros(self):
 		"""Puts arg meal_macros on page"""
 		meal_macros = self._calc_meal_macros()
@@ -515,7 +491,11 @@ class AddMealPage(Frame):
 		for adder in self.adders.values():
 			if not self._is_adder_unused(adder):
 				food = fooditemdao.retrieve_food(adder['food_var'].get())
-				food.proportionalize(float(adder['entry_amount'].get()))
+				try:
+					food.proportionalize(float(adder['entry_amount'].get()))
+				except ValueError:
+					messagebox.showerror("", f"Enter amount for {food.name}")
+					return []
 				foods.append(food)
 		return foods
 
@@ -527,6 +507,7 @@ class AddMealPage(Frame):
 		for adder in self.adders.values():
 			if not self._is_adder_unused(adder) and self._is_adder_valid(adder):
 				self._display_food_macros(adder)
+
 
 	def _display_food_macros(self, adder):
 		"""Displays each filled-out adder's nutrition section with 
@@ -543,9 +524,6 @@ class AddMealPage(Frame):
 		for i in range(len(tags)):
 			adder[f"lbl_{tags[i]}"].config(text=f"{info[tags[i]]}")
 			
-
-
-
 
 	def _clear_page(self):
 		for adder in self.adders.values():

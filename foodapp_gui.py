@@ -23,12 +23,6 @@ from groceryform import GroceryForm
 from viewproductspage import ViewProductsPage
 
 
-
-
-
-
-
-
 class FoodApp(Tk):
 
 	def __init__(self, *args, **kwargs):
